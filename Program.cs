@@ -1,7 +1,13 @@
 ﻿using System;
+using System.ComponentModel.Design;
 using System.IO;
+using System.IO.Enumeration;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Runtime.CompilerServices;
 using System.Text;
+using static System.Net.WebRequestMethods;
+using File = System.IO.File;
 
 namespace CWRGenerator
 {
@@ -176,7 +182,33 @@ namespace CWRGenerator
 
 
             // Save the CWR file to disk
-            File.WriteAllText("cwr_file.txt", cwrData.ToString());
+
+            string fileName;
+            while (true)
+            {
+                // Ask for filename
+                Console.WriteLine("Please name the file");
+                fileName = Console.ReadLine();
+
+                // Error handling
+                if (String.IsNullOrEmpty(fileName))
+                {
+                    Console.WriteLine("Name cannot be empty.  Please name the file.");
+                }
+                else
+                {
+                    File.WriteAllText($"{fileName}.V21", cwrData.ToString());
+                    break;
+                }
+            }
+                
+             
+             
+             
+
+
+
+
         }
 
         static string GenerateRandomString(Random rnd, int length)
