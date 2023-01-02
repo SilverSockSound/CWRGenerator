@@ -78,7 +78,6 @@ namespace CWRGenerator
             }
 
             // Create timing fields
-
             DateTime now = DateTime.Now;
             string creationDate = now.ToString("yyyyMMdd");
             string creationTime = now.ToString("HHmmss");
@@ -86,6 +85,8 @@ namespace CWRGenerator
 
             cwrData.AppendLine($"HDRPB{senderId}{senderName}01.10{creationDate}{creationTime}{transmissionDate}");
 
+            // Generate the Group Header line
+            cwrData.AppendLine("GRHNWR0000102.10");
 
             // Generate a random number of musical works
             int numWorks;
