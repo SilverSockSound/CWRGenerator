@@ -1,0 +1,15 @@
+C:\Users\matth\source\repos\CWRGenerator\CWRGenerator\bin\Debug\net6.0\CWRGenerator.exe
+C:\Users\matth\source\repos\CWRGenerator\CWRGenerator\bin\Debug\net6.0\CWRGenerator.deps.json
+C:\Users\matth\source\repos\CWRGenerator\CWRGenerator\bin\Debug\net6.0\CWRGenerator.runtimeconfig.json
+C:\Users\matth\source\repos\CWRGenerator\CWRGenerator\bin\Debug\net6.0\CWRGenerator.dll
+C:\Users\matth\source\repos\CWRGenerator\CWRGenerator\bin\Debug\net6.0\CWRGenerator.pdb
+C:\Users\matth\source\repos\CWRGenerator\CWRGenerator\obj\Debug\net6.0\CWRGenerator.csproj.AssemblyReference.cache
+C:\Users\matth\source\repos\CWRGenerator\CWRGenerator\obj\Debug\net6.0\CWRGenerator.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\matth\source\repos\CWRGenerator\CWRGenerator\obj\Debug\net6.0\CWRGenerator.AssemblyInfoInputs.cache
+C:\Users\matth\source\repos\CWRGenerator\CWRGenerator\obj\Debug\net6.0\CWRGenerator.AssemblyInfo.cs
+C:\Users\matth\source\repos\CWRGenerator\CWRGenerator\obj\Debug\net6.0\CWRGenerator.csproj.CoreCompileInputs.cache
+C:\Users\matth\source\repos\CWRGenerator\CWRGenerator\obj\Debug\net6.0\CWRGenerator.dll
+C:\Users\matth\source\repos\CWRGenerator\CWRGenerator\obj\Debug\net6.0\refint\CWRGenerator.dll
+C:\Users\matth\source\repos\CWRGenerator\CWRGenerator\obj\Debug\net6.0\CWRGenerator.pdb
+C:\Users\matth\source\repos\CWRGenerator\CWRGenerator\obj\Debug\net6.0\CWRGenerator.genruntimeconfig.cache
+C:\Users\matth\source\repos\CWRGenerator\CWRGenerator\obj\Debug\net6.0\ref\CWRGenerator.dll

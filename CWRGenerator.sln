@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32922.545
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CWRGenerator", "CWRGenerator.csproj", "{684E6436-F26C-441D-AD85-B42B4627204E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{684E6436-F26C-441D-AD85-B42B4627204E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{684E6436-F26C-441D-AD85-B42B4627204E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{684E6436-F26C-441D-AD85-B42B4627204E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{684E6436-F26C-441D-AD85-B42B4627204E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {53DEF8A2-D25B-4CF7-B3A4-950CCA9663AA}
+	EndGlobalSection
+EndGlobal
