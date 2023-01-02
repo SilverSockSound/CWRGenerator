@@ -125,10 +125,18 @@ namespace CWRGenerator
                 }
             }
 
+            int transactionSeqNum = 0;
+            int recordSeqNum = 0; 
+
             for (int i = 0; i < numWorks; i++)
             {
                 // Generate a random title
-                string title = GenerateRandomString(rnd, 20);
+                string title = GenerateRandomString(rnd, 40);
+                title = title.PadRight(40);
+
+                // Generate a random submitter work number
+                string submitterWorkNumber = GenerateRandomString(rnd, 14);
+                submitterWorkNumber = submitterWorkNumber.PadRight(14);
 
                 // Generate a random composer
                 string composer = GenerateRandomString(rnd, 20);
@@ -149,13 +157,21 @@ namespace CWRGenerator
                 string licensingTerms = GenerateRandomLicensingTerms(rnd);
 
                 // Add the musical work data to the CWR file
-                cwrData.AppendLine($"WR{i + 1:D6}{title}");
-                cwrData.AppendLine($"PU{composer}");
-                cwrData.AppendLine($"IP{publisher}");
-                cwrData.AppendLine($"RH{rightsHolder}");
-                cwrData.AppendLine($"PN{ipiNameNumber}");
-                cwrData.AppendLine($"CO{copyrightNotice}");
-                cwrData.AppendLine($"LT{licensingTerms}");
+                cwrData.AppendLine($"NWR{transactionSeqNum:D8}{recordSeqNum:D8}{title}  {submitterWorkNumber}              POP      Y   ORI");                
+                recordSeqNum++;
+                cwrData.AppendLine($"PU{transactionSeqNum:D8}{recordSeqNum:D8}{composer}");               
+                recordSeqNum++;
+                cwrData.AppendLine($"IP{transactionSeqNum:D8}{recordSeqNum:D8}{publisher}");               
+                recordSeqNum++;
+                cwrData.AppendLine($"RH{transactionSeqNum:D8}{recordSeqNum:D8}{rightsHolder}");
+                recordSeqNum++;
+                cwrData.AppendLine($"PN{transactionSeqNum:D8}{recordSeqNum:D8}{ipiNameNumber}");
+                recordSeqNum++;
+                cwrData.AppendLine($"CO{transactionSeqNum:D8}{recordSeqNum:D8}{copyrightNotice}");
+                recordSeqNum++;
+                cwrData.AppendLine($"LT{transactionSeqNum:D8}{recordSeqNum:D8}{licensingTerms}");
+                recordSeqNum = 0;
+                transactionSeqNum++;
             }
 
 
