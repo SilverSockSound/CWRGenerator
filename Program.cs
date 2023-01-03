@@ -242,7 +242,7 @@ namespace CWRGenerator
 
         static string GenerateRandomIPINumber(Random rnd)
         {
-            return $"{rnd.Next(100000000, 999999999):D8}";
+            return $"{rnd.Next(100000000, 999999999):D9}";
         }        
         static string GenerateRandomPRShare(Random rnd)
         {
