@@ -139,7 +139,7 @@ namespace CWRGenerator
             for (int i = 0; i < numWorks; i++)
             {
                 //Initialize transaction sequence number
-                int transactionSeqNum = 0;
+                int transactionSeqNum = i;
 
                 //Initialize record sequence number
                 int recordSeqNum = 0;
@@ -156,7 +156,7 @@ namespace CWRGenerator
 
                 // Generate a random title
                 string title = GenerateRandomString(rnd, 40);
-                title = title.PadRight(40);
+                title = title.PadRight(60);
 
                 // Generate a random submitter work number
                 string submitterWorkNumber = GenerateRandomString(rnd, 14);
@@ -167,6 +167,7 @@ namespace CWRGenerator
 
                 // Generate a random publisher
                 string publisher = GenerateRandomString(rnd, 20);
+                publisher = publisher.PadRight(45);
 
                 // Generate a random IPI name number
                 string ipiNameNumber = GenerateRandomIPINumber(rnd);
@@ -184,9 +185,9 @@ namespace CWRGenerator
                 interestedPartyNum = interestedPartyNum.PadRight(9);    
 
                 // Add the musical work data to the CWR file
-                cwrData.AppendLine($"NWR{transactionSeqNum:D8}{recordSeqNum:D8}{title}  {submitterWorkNumber}              POP      Y   ORI");                
+                cwrData.AppendLine($"NWR{transactionSeqNum:D8}{recordSeqNum:D8}{title}  {submitterWorkNumber}                               POP      Y      ORI");                
                 recordSeqNum++;
-                cwrData.AppendLine($"SPU{transactionSeqNum:D8}{recordSeqNum:D8}{publisherSeqNum:D2}{interestedPartyNum}{publisher}  E         {ipiNameNumber}                 {prOwnership}   {mrOwnership}   00000");               
+                cwrData.AppendLine($"SPU{transactionSeqNum:D8}{recordSeqNum:D8}{publisherSeqNum:D2}{interestedPartyNum}{publisher} E          {ipiNameNumber}                 {prOwnership}   {mrOwnership}   00000");               
                 recordSeqNum++;
                 cwrData.AppendLine($"SPT{transactionSeqNum:D8}{recordSeqNum:D8}{interestedPartyNum}      {prOwnership}{mrOwnership}00000I0124 {territorySeqNum:D3}");
                 recordSeqNum++;
@@ -202,12 +203,10 @@ namespace CWRGenerator
                     publisherSeqNum++;
                     interestedPartyNum = GenerateRandomString(rnd, 9);
                     interestedPartyNum = interestedPartyNum.PadRight(9);
-                    cwrData.AppendLine($"OPU{transactionSeqNum:D8}{recordSeqNum:D8}{publisherSeqNum:D2}{interestedPartyNum}{unknownPublisher}  E                                     00000   {diff:D5}   00000");
+                    cwrData.AppendLine($"OPU{transactionSeqNum:D8}{recordSeqNum:D8}{publisherSeqNum:D2}{interestedPartyNum}{unknownPublisher} E                                      00000   {diff:D5}   00000");
                     recordSeqNum++;
                 }
-                cwrData.AppendLine($"SWR{transactionSeqNum:D8}{recordSeqNum:D8}{writer}");                             
-                recordSeqNum = 0;
-                transactionSeqNum++;
+                cwrData.AppendLine($"SWR{transactionSeqNum:D8}{recordSeqNum:D8}{writer}");                                                            
             }
 
 
