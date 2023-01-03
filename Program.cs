@@ -150,6 +150,10 @@ namespace CWRGenerator
                 //Initialize territory sequence number
                 int territorySeqNum = 1;
 
+                //Setup Unknown Publisher
+                string unknownPublisher = "Unknown Publisher";
+                unknownPublisher = unknownPublisher.PadRight(45);
+
                 // Generate a random title
                 string title = GenerateRandomString(rnd, 40);
                 title = title.PadRight(40);
@@ -173,6 +177,7 @@ namespace CWRGenerator
 
                 //Generate a random MR Ownership
                 string mrOwnership = GenerateRandomMRShare(rnd);
+                int mrOwnsershipInt = int.Parse(mrOwnership);
 
                 //Generate a random Interested Party Number
                 string interestedPartyNum = GenerateRandomString(rnd, 9);
@@ -185,6 +190,20 @@ namespace CWRGenerator
                 recordSeqNum++;
                 cwrData.AppendLine($"SPT{transactionSeqNum:D8}{recordSeqNum:D8}{interestedPartyNum}      {prOwnership}{mrOwnership}00000I0124 {territorySeqNum:D3}");
                 recordSeqNum++;
+                
+                //Check if MR Ownership is less than 10000
+
+                if (mrOwnsershipInt < 10000)
+                {
+                    //Calculate difference
+                    int diff = 10000 - mrOwnsershipInt;
+
+                    //Add OPU line with difference
+                    interestedPartyNum = GenerateRandomString(rnd, 9);
+                    interestedPartyNum = interestedPartyNum.PadRight(9);
+                    cwrData.AppendLine($"OPU{transactionSeqNum:D8}{recordSeqNum:D8}{publisherSeqNum++:D2}{interestedPartyNum}{unknownPublisher}  E                                     00000   {diff}   00000");
+                    recordSeqNum++;
+                }
                 cwrData.AppendLine($"SWR{transactionSeqNum:D8}{recordSeqNum:D8}{writer}");                             
                 recordSeqNum = 0;
                 transactionSeqNum++;
