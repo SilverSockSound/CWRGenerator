@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\matth\\Source\\Repos\\CWRGenerator\\CWRGenerator.csproj": {}
+    "C:\\Users\\matth\\source\\repos\\CWRGenerator\\CWRGenerator.csproj": {}
   },
   "projects": {
-    "C:\\Users\\matth\\Source\\Repos\\CWRGenerator\\CWRGenerator.csproj": {
+    "C:\\Users\\matth\\source\\repos\\CWRGenerator\\CWRGenerator.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\matth\\Source\\Repos\\CWRGenerator\\CWRGenerator.csproj",
+        "projectUniqueName": "C:\\Users\\matth\\source\\repos\\CWRGenerator\\CWRGenerator.csproj",
         "projectName": "CWRGenerator",
-        "projectPath": "C:\\Users\\matth\\Source\\Repos\\CWRGenerator\\CWRGenerator.csproj",
+        "projectPath": "C:\\Users\\matth\\source\\repos\\CWRGenerator\\CWRGenerator.csproj",
         "packagesPath": "C:\\Users\\matth\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\matth\\Source\\Repos\\CWRGenerator\\obj\\",
+        "outputPath": "C:\\Users\\matth\\source\\repos\\CWRGenerator\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\matth\\AppData\\Roaming\\NuGet\\NuGet.Config",
