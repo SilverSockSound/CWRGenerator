@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "+WtK7SqNLz1p2E87Rr08GhqAj+7HXJKVoe+qlCVHqh/SnMZlQeuEsluKYsDuR21X+6s3amnEivNoKbp+3tVJVg==",
+  "dgSpecHash": "nxqf1PLLLlwfSXGCseUAhvXt1NLk+a/AhFpheVlX8bqwR0BpvCx9sKZjuKMTJJqXzNpRq33n51lVb1FPlSh8Xw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\matth\\Source\\Repos\\CWRGenerator\\CWRGenerator.csproj",
+  "projectFilePath": "C:\\Users\\matth\\source\\repos\\CWRGenerator\\CWRGenerator.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

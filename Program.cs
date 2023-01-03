@@ -70,6 +70,7 @@ namespace CWRGenerator
 
                 if (string.IsNullOrEmpty(senderName))
                 {
+                    //Error handling
                     Console.WriteLine("The sender name cannot be empty. Please enter a valid sender name.");
                 }
                 else
@@ -100,6 +101,7 @@ namespace CWRGenerator
             while (true)
             {
                 // Ask if random number or specified number of works is required
+                Console.WriteLine("--WORKS GENERATION--");
                 Console.Write("Enter 'R' to generate a random number of musical works or 'S' to specify the number of works: ");
                 string worksOption = Console.ReadLine();
 
@@ -117,16 +119,19 @@ namespace CWRGenerator
                 }
                 else if (worksOption == "S")
                 {
+                    // If specified number of works chosen, input range
                     Console.Write("Enter the number of musical works: ");
                     string worksInput = Console.ReadLine();
                     if (!int.TryParse(worksInput, out numWorks))
                     {
+                        //Error handling
                         Console.WriteLine("Invalid input. The number of musical works must be an integer.");
                     }
                     else
                     {
                         break;
                     }
+                    // Error handling
                     Console.WriteLine("Invalid option. Please enter 'R' to generate a random number of musical works or 'S' to specify the number of works.");
                 }
             }
@@ -144,38 +149,21 @@ namespace CWRGenerator
                 string submitterWorkNumber = GenerateRandomString(rnd, 14);
                 submitterWorkNumber = submitterWorkNumber.PadRight(14);
 
-                // Generate a random composer
-                string composer = GenerateRandomString(rnd, 20);
+                // Generate a random writer
+                string writer = GenerateRandomString(rnd, 20);
 
                 // Generate a random publisher
                 string publisher = GenerateRandomString(rnd, 20);
 
-                // Generate a random rights holder
-                string rightsHolder = GenerateRandomString(rnd, 20);
-
                 // Generate a random IPI name number
                 string ipiNameNumber = GenerateRandomIPINumber(rnd);
-
-                // Generate a random copyright notice
-                string copyrightNotice = GenerateRandomCopyrightNotice(rnd, title);
-
-                // Generate a random licensing terms
-                string licensingTerms = GenerateRandomLicensingTerms(rnd);
 
                 // Add the musical work data to the CWR file
                 cwrData.AppendLine($"NWR{transactionSeqNum:D8}{recordSeqNum:D8}{title}  {submitterWorkNumber}              POP      Y   ORI");                
                 recordSeqNum++;
-                cwrData.AppendLine($"PU{transactionSeqNum:D8}{recordSeqNum:D8}{composer}");               
+                cwrData.AppendLine($"PU{transactionSeqNum:D8}{recordSeqNum:D8}{writer}");               
                 recordSeqNum++;
-                cwrData.AppendLine($"IP{transactionSeqNum:D8}{recordSeqNum:D8}{publisher}");               
-                recordSeqNum++;
-                cwrData.AppendLine($"RH{transactionSeqNum:D8}{recordSeqNum:D8}{rightsHolder}");
-                recordSeqNum++;
-                cwrData.AppendLine($"PN{transactionSeqNum:D8}{recordSeqNum:D8}{ipiNameNumber}");
-                recordSeqNum++;
-                cwrData.AppendLine($"CO{transactionSeqNum:D8}{recordSeqNum:D8}{copyrightNotice}");
-                recordSeqNum++;
-                cwrData.AppendLine($"LT{transactionSeqNum:D8}{recordSeqNum:D8}{licensingTerms}");
+                cwrData.AppendLine($"IP{transactionSeqNum:D8}{recordSeqNum:D8}{publisher}");                             
                 recordSeqNum = 0;
                 transactionSeqNum++;
             }
@@ -200,15 +188,7 @@ namespace CWRGenerator
                     File.WriteAllText($"{fileName}.V21", cwrData.ToString());
                     break;
                 }
-            }
-                
-             
-             
-             
-
-
-
-
+            }                                                  
         }
 
         static string GenerateRandomString(Random rnd, int length)
@@ -221,24 +201,7 @@ namespace CWRGenerator
         static string GenerateRandomIPINumber(Random rnd)
         {
             return $"{rnd.Next(100000000, 999999999):D8}";
-        }
-
-        static string GenerateRandomCopyrightNotice(Random rnd, string title)
-        {
-            int year = rnd.Next(1900, 2023);
-            return $"Copyright {year} by {title}";
-        }
-
-        static string GenerateRandomLicensingTerms(Random rnd)
-        {
-            int numTerms = rnd.Next(1, 5);
-            string[] terms = new string[numTerms];
-            for (int i = 0; i < numTerms; i++)
-            {
-                terms[i] = GenerateRandomString(rnd, 15);
-            }
-            return string.Join("/", terms);
-        }
+        }        
     }
 };
 
