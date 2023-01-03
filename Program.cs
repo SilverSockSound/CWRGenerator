@@ -199,9 +199,10 @@ namespace CWRGenerator
                     int diff = 10000 - mrOwnsershipInt;
 
                     //Add OPU line with difference
+                    publisherSeqNum++;
                     interestedPartyNum = GenerateRandomString(rnd, 9);
                     interestedPartyNum = interestedPartyNum.PadRight(9);
-                    cwrData.AppendLine($"OPU{transactionSeqNum:D8}{recordSeqNum:D8}{publisherSeqNum++:D2}{interestedPartyNum}{unknownPublisher}  E                                     00000   {diff}   00000");
+                    cwrData.AppendLine($"OPU{transactionSeqNum:D8}{recordSeqNum:D8}{publisherSeqNum:D2}{interestedPartyNum}{unknownPublisher}  E                                     00000   {diff:D5}   00000");
                     recordSeqNum++;
                 }
                 cwrData.AppendLine($"SWR{transactionSeqNum:D8}{recordSeqNum:D8}{writer}");                             
