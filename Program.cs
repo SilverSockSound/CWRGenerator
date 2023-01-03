@@ -27,7 +27,7 @@ namespace CWRGenerator
 
             while (true)
             {
-                Console.WriteLine("-- HDR Generation --");
+                Console.WriteLine("--HDR Generation--");
                 Console.WriteLine("SENDER ID");
                 Console.Write("Enter 'R' to generate a random sender ID or 'I' to input a sender ID: ");
                 string senderIdOption = Console.ReadLine();
@@ -134,13 +134,22 @@ namespace CWRGenerator
                     // Error handling
                     Console.WriteLine("Invalid option. Please enter 'R' to generate a random number of musical works or 'S' to specify the number of works.");
                 }
-            }
-
-            int transactionSeqNum = 0;
-            int recordSeqNum = 0; 
+            }            
 
             for (int i = 0; i < numWorks; i++)
             {
+                //Initialize transaction sequence number
+                int transactionSeqNum = 0;
+
+                //Initialize record sequence number
+                int recordSeqNum = 0;
+
+                //Initialize publisher sequence number
+                int publisherSeqNum = 1;
+
+                //Initialize territory sequence number
+                int territorySeqNum = 1;
+
                 // Generate a random title
                 string title = GenerateRandomString(rnd, 40);
                 title = title.PadRight(40);
@@ -157,13 +166,26 @@ namespace CWRGenerator
 
                 // Generate a random IPI name number
                 string ipiNameNumber = GenerateRandomIPINumber(rnd);
+                ipiNameNumber = ipiNameNumber.PadLeft(11, '0');
+
+                //Generate a random PR Ownership
+                string prOwnership = GenerateRandomPRShare(rnd);
+
+                //Generate a random MR Ownership
+                string mrOwnership = GenerateRandomMRShare(rnd);
+
+                //Generate a random Interested Party Number
+                string interestedPartyNum = GenerateRandomString(rnd, 9);
+                interestedPartyNum = interestedPartyNum.PadRight(9);    
 
                 // Add the musical work data to the CWR file
                 cwrData.AppendLine($"NWR{transactionSeqNum:D8}{recordSeqNum:D8}{title}  {submitterWorkNumber}              POP      Y   ORI");                
                 recordSeqNum++;
-                cwrData.AppendLine($"PU{transactionSeqNum:D8}{recordSeqNum:D8}{writer}");               
+                cwrData.AppendLine($"SPU{transactionSeqNum:D8}{recordSeqNum:D8}{publisherSeqNum:D2}{interestedPartyNum}{publisher}  E         {ipiNameNumber}                 {prOwnership}   {mrOwnership}   00000");               
                 recordSeqNum++;
-                cwrData.AppendLine($"IP{transactionSeqNum:D8}{recordSeqNum:D8}{publisher}");                             
+                cwrData.AppendLine($"SPT{transactionSeqNum:D8}{recordSeqNum:D8}{interestedPartyNum}      {prOwnership}{mrOwnership}00000I0124 {territorySeqNum:D3}");
+                recordSeqNum++;
+                cwrData.AppendLine($"SWR{transactionSeqNum:D8}{recordSeqNum:D8}{writer}");                             
                 recordSeqNum = 0;
                 transactionSeqNum++;
             }
@@ -202,6 +224,15 @@ namespace CWRGenerator
         {
             return $"{rnd.Next(100000000, 999999999):D8}";
         }        
+        static string GenerateRandomPRShare(Random rnd)
+        {
+            return $"{rnd.Next(00000, 05000):D5}";
+        }
+        static string GenerateRandomMRShare(Random rnd)
+        {
+            return $"{rnd.Next(00000, 10000):D5}";
+        }
+
     }
 };
 
