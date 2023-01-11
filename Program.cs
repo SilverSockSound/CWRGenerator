@@ -217,9 +217,9 @@ namespace CWRGenerator
 
                     //Add OPU line with difference
                     publisherSeqNum++;
-                    interestedPartyNumPub = GenerateRandomString(rnd, 9);
-                    interestedPartyNumPub = interestedPartyNumPub.PadRight(9);
-                    cwrData.AppendLine($"OPU{transactionSeqNum:D8}{recordSeqNum:D8}{publisherSeqNum:D2}{interestedPartyNumPub}{unknownPublisher} E                                      00000   {diff:D5}   00000");
+                    string interestedPartyNumUnknownPub = GenerateRandomString(rnd, 9);
+                    interestedPartyNumUnknownPub = interestedPartyNumUnknownPub.PadRight(9);
+                    cwrData.AppendLine($"OPU{transactionSeqNum:D8}{recordSeqNum:D8}{publisherSeqNum:D2}{interestedPartyNumUnknownPub}{unknownPublisher} E                                      00000   {diff:D5}   00000");
                     recordSeqNum++;
                 }
 
@@ -236,6 +236,10 @@ namespace CWRGenerator
                 //SWT Generation
                 territorySeqNum = 1;
                 cwrData.AppendLine($"SWT{transactionSeqNum:D8}{recordSeqNum:D8}{interestedPartyNumWriter}{diffpr:D5}0000000000I0124 {territorySeqNum:D3}");
+                recordSeqNum++;
+
+                //PWR Generation
+                cwrData.AppendLine($"PWR{transactionSeqNum:D8}{recordSeqNum:D8}{interestedPartyNumPub}{publisher}                            {interestedPartyNumWriter}");
             }
 
 
