@@ -180,6 +180,7 @@ namespace CWRGenerator
 
                 //Generate a random PR Ownership
                 string prOwnership = GenerateRandomPRShare(rnd);
+                int prOwnershipInt = int.Parse(prOwnership);
 
                 //Generate a random MR Ownership
                 string mrOwnership = GenerateRandomMRShare(rnd);
@@ -219,11 +220,13 @@ namespace CWRGenerator
                 }
 
                 //SWR Generation
+                //calc leftover pr
+                int diffpr = 10000 - prOwnershipInt;
                 interestedPartyNum = GenerateRandomString(rnd, 9);
                 interestedPartyNum = interestedPartyNum.PadRight(9);
                 ipiNameNumber = GenerateRandomIPINumber(rnd);
                 ipiNameNumber = ipiNameNumber.PadLeft(11, '0');
-                cwrData.AppendLine($"SWR{transactionSeqNum:D8}{recordSeqNum:D8}{interestedPartyNum}{writerLastName}{writerFirstName} C          {ipiNameNumber}");                                                            
+                cwrData.AppendLine($"SWR{transactionSeqNum:D8}{recordSeqNum:D8}{interestedPartyNum}{writerLastName}{writerFirstName} C          {ipiNameNumber}   {diffpr:D5}   00000   00000");                                                            
             }
 
 
