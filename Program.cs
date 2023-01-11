@@ -135,7 +135,7 @@ namespace CWRGenerator
                     Console.WriteLine("Invalid option. Please enter 'R' to generate a random number of musical works or 'S' to specify the number of works.");
                 }
             }            
-
+            //Generate Work Information
             for (int i = 0; i < numWorks; i++)
             {
                 //Initialize transaction sequence number
@@ -162,8 +162,13 @@ namespace CWRGenerator
                 string submitterWorkNumber = GenerateRandomString(rnd, 14);
                 submitterWorkNumber = submitterWorkNumber.PadRight(14);
 
-                // Generate a random writer
-                string writer = GenerateRandomString(rnd, 20);
+                // Generate a random writer lastname
+                string writerLastName = GenerateRandomString(rnd, 20);
+                writerLastName = writerLastName.PadRight(45);
+
+                //Generate a random writer firstname
+                string writerFirstName = GenerateRandomString(rnd, 20);
+                writerFirstName = writerFirstName.PadRight(30);
 
                 // Generate a random publisher
                 string publisher = GenerateRandomString(rnd, 20);
@@ -175,6 +180,7 @@ namespace CWRGenerator
 
                 //Generate a random PR Ownership
                 string prOwnership = GenerateRandomPRShare(rnd);
+                int prOwnershipInt = int.Parse(prOwnership);
 
                 //Generate a random MR Ownership
                 string mrOwnership = GenerateRandomMRShare(rnd);
@@ -185,13 +191,19 @@ namespace CWRGenerator
                 interestedPartyNum = interestedPartyNum.PadRight(9);    
 
                 // Add the musical work data to the CWR file
+                //NWR Generation
                 cwrData.AppendLine($"NWR{transactionSeqNum:D8}{recordSeqNum:D8}{title}  {submitterWorkNumber}                               POP      Y      ORI");                
                 recordSeqNum++;
+
+                //SPU Generation
                 cwrData.AppendLine($"SPU{transactionSeqNum:D8}{recordSeqNum:D8}{publisherSeqNum:D2}{interestedPartyNum}{publisher} E          {ipiNameNumber}                 {prOwnership}   {mrOwnership}   00000");               
                 recordSeqNum++;
+
+                //SPT Generation
                 cwrData.AppendLine($"SPT{transactionSeqNum:D8}{recordSeqNum:D8}{interestedPartyNum}      {prOwnership}{mrOwnership}00000I0124 {territorySeqNum:D3}");
                 recordSeqNum++;
                 
+                //Unknown Publisher Generation
                 //Check if MR Ownership is less than 10000
 
                 if (mrOwnsershipInt < 10000)
@@ -206,7 +218,15 @@ namespace CWRGenerator
                     cwrData.AppendLine($"OPU{transactionSeqNum:D8}{recordSeqNum:D8}{publisherSeqNum:D2}{interestedPartyNum}{unknownPublisher} E                                      00000   {diff:D5}   00000");
                     recordSeqNum++;
                 }
-                cwrData.AppendLine($"SWR{transactionSeqNum:D8}{recordSeqNum:D8}{writer}");                                                            
+
+                //SWR Generation
+                //calc leftover pr
+                int diffpr = 10000 - prOwnershipInt;
+                interestedPartyNum = GenerateRandomString(rnd, 9);
+                interestedPartyNum = interestedPartyNum.PadRight(9);
+                ipiNameNumber = GenerateRandomIPINumber(rnd);
+                ipiNameNumber = ipiNameNumber.PadLeft(11, '0');
+                cwrData.AppendLine($"SWR{transactionSeqNum:D8}{recordSeqNum:D8}{interestedPartyNum}{writerLastName}{writerFirstName} C          {ipiNameNumber}   {diffpr:D5}   00000   00000");                                                            
             }
 
 
