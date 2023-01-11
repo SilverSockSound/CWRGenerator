@@ -186,9 +186,13 @@ namespace CWRGenerator
                 string mrOwnership = GenerateRandomMRShare(rnd);
                 int mrOwnsershipInt = int.Parse(mrOwnership);
 
-                //Generate a random Interested Party Number
-                string interestedPartyNum = GenerateRandomString(rnd, 9);
-                interestedPartyNum = interestedPartyNum.PadRight(9);    
+                //Generate a random Interested Party Number For Publisher
+                string interestedPartyNumPub = GenerateRandomString(rnd, 9);
+                interestedPartyNumPub = interestedPartyNumPub.PadRight(9);
+
+                //Generate a random Interested PArty Number For Writer
+                string interestedPartyNumWriter = GenerateRandomString(rnd, 9);
+                interestedPartyNumWriter = interestedPartyNumWriter.PadRight(9);
 
                 // Add the musical work data to the CWR file
                 //NWR Generation
@@ -196,11 +200,11 @@ namespace CWRGenerator
                 recordSeqNum++;
 
                 //SPU Generation
-                cwrData.AppendLine($"SPU{transactionSeqNum:D8}{recordSeqNum:D8}{publisherSeqNum:D2}{interestedPartyNum}{publisher} E          {ipiNameNumber}                 {prOwnership}   {mrOwnership}   00000");               
+                cwrData.AppendLine($"SPU{transactionSeqNum:D8}{recordSeqNum:D8}{publisherSeqNum:D2}{interestedPartyNumPub}{publisher} E          {ipiNameNumber}                 {prOwnership}   {mrOwnership}   00000");               
                 recordSeqNum++;
 
                 //SPT Generation
-                cwrData.AppendLine($"SPT{transactionSeqNum:D8}{recordSeqNum:D8}{interestedPartyNum}      {prOwnership}{mrOwnership}00000I0124 {territorySeqNum:D3}");
+                cwrData.AppendLine($"SPT{transactionSeqNum:D8}{recordSeqNum:D8}{interestedPartyNumPub}      {prOwnership}{mrOwnership}00000I0124 {territorySeqNum:D3}");
                 recordSeqNum++;
                 
                 //Unknown Publisher Generation
@@ -213,20 +217,25 @@ namespace CWRGenerator
 
                     //Add OPU line with difference
                     publisherSeqNum++;
-                    interestedPartyNum = GenerateRandomString(rnd, 9);
-                    interestedPartyNum = interestedPartyNum.PadRight(9);
-                    cwrData.AppendLine($"OPU{transactionSeqNum:D8}{recordSeqNum:D8}{publisherSeqNum:D2}{interestedPartyNum}{unknownPublisher} E                                      00000   {diff:D5}   00000");
+                    interestedPartyNumPub = GenerateRandomString(rnd, 9);
+                    interestedPartyNumPub = interestedPartyNumPub.PadRight(9);
+                    cwrData.AppendLine($"OPU{transactionSeqNum:D8}{recordSeqNum:D8}{publisherSeqNum:D2}{interestedPartyNumPub}{unknownPublisher} E                                      00000   {diff:D5}   00000");
                     recordSeqNum++;
                 }
 
                 //SWR Generation
                 //calc leftover pr
                 int diffpr = 10000 - prOwnershipInt;
-                interestedPartyNum = GenerateRandomString(rnd, 9);
-                interestedPartyNum = interestedPartyNum.PadRight(9);
+                interestedPartyNumWriter = GenerateRandomString(rnd, 9);
+                interestedPartyNumWriter = interestedPartyNumWriter.PadRight(9);
                 ipiNameNumber = GenerateRandomIPINumber(rnd);
                 ipiNameNumber = ipiNameNumber.PadLeft(11, '0');
-                cwrData.AppendLine($"SWR{transactionSeqNum:D8}{recordSeqNum:D8}{interestedPartyNum}{writerLastName}{writerFirstName} C          {ipiNameNumber}   {diffpr:D5}   00000   00000");                                                            
+                cwrData.AppendLine($"SWR{transactionSeqNum:D8}{recordSeqNum:D8}{interestedPartyNumWriter}{writerLastName}{writerFirstName} C          {ipiNameNumber}   {diffpr:D5}   00000   00000");
+                recordSeqNum++;
+
+                //SWT Generation
+                territorySeqNum = 1;
+                cwrData.AppendLine($"SWT{transactionSeqNum:D8}{recordSeqNum:D8}{interestedPartyNumWriter}{diffpr:D5}0000000000I0124 {territorySeqNum:D3}");
             }
 
 
